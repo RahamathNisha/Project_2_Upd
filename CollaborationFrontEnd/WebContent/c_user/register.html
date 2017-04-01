@@ -1,0 +1,335 @@
+<style>
+body {
+	font: 400 15px/1.8 Lato, cursive;
+	color: #777;
+}
+
+h3, h4 {
+	margin: 10px 0 30px 0;
+	letter-spacing: 10px;
+	font-size: 20px;
+	color: #111;
+}
+
+.container {
+	padding: 80px 120px;
+}
+
+.person {
+	border: 10px solid transparent;
+	margin-bottom: 25px;
+	width: 80%;
+	height: 80%;
+	opacity: 0.7;
+}
+
+.person:hover {
+	border-color: #f1f1f1;
+}
+
+.carousel-inner img {
+	-webkit-filter: grayscale(90%);
+	filter: grayscale(90%); /* make all photos black and white */
+	width: 100%; /* Set width to 100% */
+	margin: auto;
+}
+
+.carousel-caption h3 {
+	color: #fff !important;
+}
+
+@media ( max-width : 600px) {
+	.carousel-caption {
+		display: none;
+	}
+}
+
+.bg-1 {
+	background: #2d2d30;
+	color: #bdbdbd;
+}
+
+.bg-1 h3 {
+	color: #fff;
+}
+
+.bg-1 p {
+	font-style: italic;
+}
+
+.list-group-item:first-child {
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+}
+
+.list-group-item:last-child {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.thumbnail {
+	padding: 0 0 15px 0;
+	border: none;
+	border-radius: 0;
+}
+
+.thumbnail p {
+	margin-top: 15px;
+	color: #555;
+}
+
+.btn {
+	padding: 10px 20px;
+	background-color: #333;
+	color: #f1f1f1;
+	border-radius: 0;
+	transition: .2s;
+}
+
+.btn:hover, .btn:focus {
+	border: 1px solid #333;
+	background-color: #fff;
+	color: #000;
+}
+
+.modal-header, h4, .close {
+	background-color: #333;
+	color: #fff !important;
+	text-align: center;
+	font-size: 30px;
+}
+
+.modal-header, .modal-body {
+	padding: 40px 50px;
+}
+
+.nav-tabs li a {
+	color: #777;
+}
+
+#googleMap {
+	width: 100%;
+	height: 400px;
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+
+.navbar {
+	font-family: Montserrat, sans-serif;
+	margin-bottom: 0;
+	background-color: #2d2d30;
+	border: 0;
+	font-size: 11px !important;
+	letter-spacing: 4px;
+	opacity: 0.9;
+}
+
+.navbar li a, .navbar .navbar-brand {
+	color: #d5d5d5 !important;
+}
+
+.navbar-nav li a:hover {
+	color: #fff !important;
+}
+
+.navbar-nav li.active a {
+	color: #fff !important;
+	background-color: #29292c !important;
+}
+
+.navbar-default .navbar-toggle {
+	border-color: transparent;
+}
+
+.open .dropdown-toggle {
+	color: #fff;
+	background-color: #555 !important;
+}
+
+.dropdown-menu li a {
+	color: #000 !important;
+}
+
+.dropdown-menu li a:hover {
+	background-color: red !important;
+}
+
+footer {
+	background-color: #2d2d30;
+	color: #f5f5f5;
+	padding: 32px;
+}
+
+footer a {
+	color: #f5f5f5;
+}
+
+footer a:hover {
+	color: #777;
+	text-decoration: none;
+}
+
+.form-control {
+	border-radius: 0;
+}
+
+textarea {
+	resize: none;
+}
+</style>
+<body ng-app="myApp">
+	<!-- <div class="generic-container" ng-controller="UserController as ctrl"> -->
+	<nav class="navbar navbar-default ">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#/">Collaborative Media</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#/">HOME</a></li>
+					<li class="active"><a href="#/chat"> Chat</a></li>
+					<!-- <li class="active"><a href="#/logout"> Logout</a></li> -->
+					<li><a href="#/logout" ng-click="ctrl.logout()">Logout</a></li>
+					<li><a href="#/reg">Register With Us</a></li>
+					<li><a href="#/Forum">Forum </a></li>
+					<li><a href="#/ForumView">ForumView </a></li>
+					<li><a href="#/Blog">Blog </a></li>
+					<li><a href="#/BlogView">Blog View </a></li>
+					<li><a href="#/Job">Post Job</a></li>
+					<li><a href="#/JobList">Job List</a></li>
+					<li><a href="#/JobApply">Job Apply</a></li>
+					<li><a href="#/search_friend">Search Friend</a></li>
+					<li><a href="#/view_friend">View Friend</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br />
+	<div class="generic-container" ng-controller="UserController as ctrl"
+		align="center">
+
+
+		<div ng-hide='ctrl.user.errorMessage=="" '>
+			<div class="alert alert-danger fade in">Error :
+				{{ctrl.user.errorMessage}}</div>
+
+		</div>
+
+
+		<div ng-show='ctrl.user.errorMessage=="" '>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span class="lead">Registration Here</span>
+				</div>
+				<div class="formcontainer">
+					<form ng-submit="ctrl.submit()" name="myForm"
+						class="form-horizontal">
+
+						<label>Register As..</label>
+						<div class="container">
+							<div class="radio">
+								<label class="radio-inline"> <input type="radio"
+									name="role" value="student" ng-model="ctrl.user.role">
+									Student
+								</label> <label class="radio-inline"> <input type="radio"
+									name="role" value="alumni" ng-model="ctrl.user.role">
+									Alumni
+								</label> <label class="radio-inline"> <input type="radio"
+									name="role" value="employee" ng-model="ctrl.user.role">
+									Employee
+								</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-lable" for="id">ID</label>
+								<div class="col-md-7">
+									<input type="text" ng-model="ctrl.user.id" id="id"
+										class="userid form-control input-sm"
+										placeholder="Enter your ID" required ng-minlength="3" />
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-lable" for="name">Name</label>
+								<div class="col-md-7">
+									<input type="text" ng-model="ctrl.user.name" id="name"
+										class="username form-control input-sm"
+										placeholder="Enter your name" required ng-minlength="3" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-lable" for="password">Password</label>
+								<div class="col-md-7">
+									<input type="password" ng-model="ctrl.user.password"
+										id="password" class="username form-control input-sm"
+										placeholder="Enter your password" required ng-minlength="3" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-lable" for="email">Email</label>
+								<div class="col-md-7">
+									<input type="email" ng-model="ctrl.user.email" id="email"
+										class="email form-control input-sm"
+										placeholder="Enter your Email" required />
+
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-lable" for="mobileNo">Mobile</label>
+								<div class="col-md-7">
+									<input type="tel" ng-model="ctrl.user.mobileNo" id="mobileNo"
+										class="mobile form-control input-sm"
+										placeholder="Enter your contact number" required />
+
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-lable" for="address">Address</label>
+								<div class="col-md-7">
+									<input type="text" width="100" height="50"
+										ng-model="ctrl.user.address" id="address"
+										class="form-control input-sm"
+										placeholder="Enter your Address." />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-actions floatRight">
+								<input type="submit" value="Register"
+									class="btn btn-link btn-sm">
+								<button type="button" ng-click="ctrl.reset()"
+									class="btn btn-link btn-sm">Reset Form</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

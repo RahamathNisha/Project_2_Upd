@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ViewJob</title>
+<link rel="shortcut icon" href="favicon.ico">
+
+<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+body {
+	font: 400 15px/1.8 Lato, sans-serif;
+	color: #777;
+}
+
+h3, h4 {
+	margin: 10px 0 30px 0;
+	letter-spacing: 10px;
+	font-size: 20px;
+	color: #111;
+}
+
+.container {
+	padding: 80px 120px;
+}
+
+.person {
+	border: 10px solid transparent;
+	margin-bottom: 25px;
+	width: 90%;
+	height: 90%;
+	opacity: 0.7;
+}
+
+.person:hover {
+	border-color: #f1f1f1;
+}
+
+.carousel-inner img {
+	-webkit-filter: grayscale(90%);
+	filter: grayscale(90%); /* make all photos black and white */
+	width: 100%; /* Set width to 100% */
+	margin: auto;
+}
+
+.carousel-caption h3 {
+	color: #fff !important;
+}
+
+@media ( max-width : 600px) {
+	.carousel-caption {
+		display: none;
+		/* Hide the carousel text when the screen is less than 600 pixels wide */
+	}
+}
+
+.bg-1 {
+	background: #2d2d30;
+	color: #bdbdbd;
+}
+
+.bg-1 h3 {
+	color: #fff;
+}
+
+.bg-1 p {
+	font-style: italic;
+}
+
+.list-group-item:first-child {
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+}
+
+.list-group-item:last-child {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.thumbnail {
+	padding: 0 0 15px 0;
+	border: none;
+	border-radius: 0;
+}
+
+.thumbnail p {
+	margin-top: 15px;
+	color: #555;
+}
+
+.btn {
+	padding: 10px 20px;
+	background-color: #333;
+	color: #f1f1f1;
+	border-radius: 0;
+	transition: .2s;
+}
+
+.btn:hover, .btn:focus {
+	border: 1px solid #333;
+	background-color: #fff;
+	color: #000;
+}
+
+.modal-header, h4, .close {
+	background-color: #333;
+	color: #fff !important;
+	text-align: center;
+	font-size: 30px;
+}
+
+.modal-header, .modal-body {
+	padding: 40px 50px;
+}
+
+.nav-tabs li a {
+	color: #777;
+}
+
+#googleMap {
+	width: 100%;
+	height: 400px;
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+
+.navbar {
+	font-family: Montserrat, sans-serif;
+	margin-bottom: 0;
+	background-color: #2d2d30;
+	border: 0;
+	font-size: 11px !important;
+	letter-spacing: 4px;
+	opacity: 0.9;
+}
+
+.navbar li a, .navbar .navbar-brand {
+	color: #d5d5d5 !important;
+}
+
+.navbar-nav li a:hover {
+	color: #fff !important;
+}
+
+.navbar-nav li.active a {
+	color: #fff !important;
+	background-color: #29292c !important;
+}
+
+.navbar-default .navbar-toggle {
+	border-color: transparent;
+}
+
+.open .dropdown-toggle {
+	color: #fff;
+	background-color: #555 !important;
+}
+
+.dropdown-menu li a {
+	color: #000 !important;
+}
+
+.dropdown-menu li a:hover {
+	background-color: red !important;
+}
+
+footer {
+	background-color: #2d2d30;
+	color: #f5f5f5;
+	padding: 32px;
+}
+
+footer a {
+	color: #f5f5f5;
+}
+
+footer a:hover {
+	color: #777;
+	text-decoration: none;
+}
+
+.form-control {
+	border-radius: 0;
+}
+
+textarea {
+	resize: none;
+}
+</style>
+</head>
+<body ng-app="myApp">
+<div class="generic-container" ng-controller="UserController as ctrl">
+<nav class="navbar navbar-default ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#/">Team Collaboration  Welcome {{username}}!</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+         <li><a href="#/">HOME</a></li>
+        <li class="active"><a href="#/chat"> Chat</a></li>
+        <!-- <li class="active"><a href="#/logout"> Logout</a></li> -->
+        <li><a href="#/logout" ng-click="ctrl.logout()">Logout</a></li>
+        <li><a href="#/reg">Register With Us</a></li>
+        <li><a href="#/Forum">Forum </a></li>
+        <li><a href="#/ForumView">ForumView </a></li>
+        <li><a href="#/listForum">List Of Forum</a></li>
+        <li><a href="#/Blog">Blog </a></li>
+        <li><a href="#/BlogView">Blog View </a></li>
+        <li><a href="#/Job">Post Job</a></li>
+        <li><a href="#/JobList">Job List</a></li>
+        <li><a href="#/JobApply">Job Apply</a></li>
+        <li><a href="#/search_friend">Search Friend</a></li>
+        <li><a href="#/view_friend">View Friend</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+	<div class="container" ng-controller="JobController as ctrl">
+		<br/><br/><br/><br/><br/>
+		<form class="form-horizontal" name="myForm" role="form" ng-submit="ctrl.submit()">
+			
+			<div class="form-group" ng-class="{'has-error': form.title.$dirty && form.title.$error.required}">
+				<label for="title" class="col-sm-3 control-label">Job Title :</label>
+				<div class="col-sm-6">
+					<input type="text" name="title" id="title" class="form-control" ng-model="ctrl.job.title" required/>
+					<span ng-show="form.title.$dirty && form.title.$error.required" class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group" ng-class="{'has-error': form.description.$dirty && form.description.$error.required}">
+				<label for="description" class="col-sm-3 control-label">Job description :</label>
+				<div class="col-sm-6">
+					<textarea rows="5" cols="80" id="description" name="description" class="form-control" ng-model="ctrl.job.description" required></textarea>
+					<span ng-show="form.description.$dirty && form.description.$error.required" class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group" ng-class="{'has-error': form.qualification.$dirty && form.qualification.$error.required}">
+				<label for="qualification" class="col-sm-3 control-label">Job qualification :</label>
+				<div class="col-sm-6">
+					<input type="text" name="qualification" id="qualification" class="form-control" ng-model="ctrl.job.qualification" required/>
+					<span ng-show="form.qualification.$dirty && form.qualification.$error.required" class="help-block"></span>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{'has-error': form.location.$dirty && form.location.$error.required}">
+				<label for="location" class="col-sm-3 control-label">Job location :</label>
+				<div class="col-sm-6">
+					<input type="text" name="location" id="location" class="form-control" ng-model="ctrl.job.location" required/>
+					<span ng-show="form.location.$dirty && form.location.$error.required" class="help-block"></span>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{'has-error': form.experience.$dirty && form.experience.$error.required}">
+				<label for="experience" class="col-sm-3 control-label">Job experience :</label>
+				<div class="col-sm-6">
+					<input type="text" name="experience" id="experience" class="form-control" ng-model="ctrl.job.experience" required/>
+					<span ng-show="form.experience.$dirty && form.experience.$error.required" class="help-block"></span>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{'has-error': form.companyname.$dirty && form.companyname.$error.required}">
+				<label for="companyname" class="col-sm-3 control-label">Job companyname :</label>
+				<div class="col-sm-6">
+					<input type="text" name="companyname" id="companyname" class="form-control" ng-model="ctrl.job.companyname" required/>
+					<span ng-show="form.companyname.$dirty && form.companyname.$error.required" class="help-block"></span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<button type="submit" ng-disabled="form$invalid || ctrl.dataLoading" class="btn btn-info">Save Job?</button>
+					<button type="reset" class="btn btn-danger" ng-click="ctrl.reset()" >Clear</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	
+	<script src="c_job/JobController.js"></script>
+	<script src="c_job/JobService.js"></script>
+
+</body>
+</html>

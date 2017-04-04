@@ -32,7 +32,7 @@ public class ForumController
 	UserForumDAO service;
 
 	//@Autowired
-	ForumCategoryDAO sfcervice;
+	ForumCategoryDAO f_catdao;
 	
 	private static final Logger log = LoggerFactory.getLogger(ForumController.class);
 
@@ -72,12 +72,13 @@ public class ForumController
 		}
 		return new ResponseEntity<List<UserForum>>(lsts, HttpStatus.OK);
 	}
-
+           
+	
 	@RequestMapping(value = "/alluserforumcats", method = RequestMethod.GET)
 	public ResponseEntity<List<ForumCategory>> listAllUserForumCategory()	{
 
 		log.debug("calling => listAllUserForumCategory() method");
-		List<ForumCategory> lsts = sfcervice.getAllForumCategory();
+		List<ForumCategory> lsts = f_catdao.getAllForumCategory();
 		if(lsts.isEmpty()){
 			return new ResponseEntity<List<ForumCategory>>(HttpStatus.NO_CONTENT);
 		}

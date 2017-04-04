@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,11 +30,12 @@ public class BlogController implements ServletContextAware {
 	//@Autowired
 	ServletContext req;
 	
+	private static final Logger log = LoggerFactory.getLogger(BlogController.class);
 	
 	@GetMapping("/BlogDetails/")
 	public ResponseEntity<List<Blog>> listAllUserDetails(){
 		List<Blog> blogDetails = blogDAO.getAllBlogs();
-		System.out.println(blogDetails);
+		log.debug("Data retrieved successfully");
 		if (blogDetails.isEmpty()){
 			
 			return new ResponseEntity<List<Blog>>(HttpStatus.NO_CONTENT);
@@ -42,8 +45,6 @@ public class BlogController implements ServletContextAware {
 		return new ResponseEntity<List<Blog>>(blogDetails, HttpStatus.OK);
 		
 	}
-	
-	
 	
 	@GetMapping("/Blog/{username}")
 	public ResponseEntity<Blog> getBlog(@ModelAttribute("username") int id){
@@ -60,8 +61,8 @@ public class BlogController implements ServletContextAware {
 	@PostMapping("/BlogSave/")
 	public ResponseEntity<Void> createBlog(@RequestBody Blog blog, UriComponentsBuilder ucBuilder)
 	{
-	System.out.println("@@@@@@@@@@@@@---------------->>>In Blog Detail");
-	System.out.println(blog.getTitle()+"  "+ blog.getDescription());
+	log.debug("@@@@@@@@@@@@@---------------->>>In Blog Detail");
+	log.debug(blog.getTitle()+" "+blog.getDescription());
 		if(blogDAO.getBlogById(blog.getId())!= null)
 		{
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -72,9 +73,8 @@ public class BlogController implements ServletContextAware {
 		HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/Blog/{id}").buildAndExpand(blog.getTitle()).toUri());
 	    return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-		
-		
 	}
+	
 	@PutMapping("/Blog/{username}")
 	public ResponseEntity<Blog> updateBlog(@ModelAttribute("username") int id, @RequestBody Blog blog){
 		
@@ -91,8 +91,9 @@ public class BlogController implements ServletContextAware {
 	@PostMapping("/admin/delete/{user}")
 	public ResponseEntity<Blog> deleteBlog(@ModelAttribute("user") int id)
 	{
-		System.out.println(id);
-		System.out.println("inside BlogController delete Blog");
+		
+		log.debug("id is "+id);
+		log.debug("inside BlogController delete Blog");
 		Blog Blog = blogDAO.getBlogById(id);
 		if (Blog == null){
 			return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
